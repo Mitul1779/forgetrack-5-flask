@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>URL Submission</title>
+</head>
+<body>
+    <h1>Submit a URL</h1>
+    <form action="/" method="POST">
+        <input type = "url" name = "url" placeholder = "Enter URL"> 
+        <input type = "submit" value = "Submit">
+    </form>
+    {% if url_code %}
+        <p>Your generated URL code is: {{ url_code }}</p>
+    {% endif %}
+</body>
+</html>

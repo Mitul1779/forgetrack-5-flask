@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <table border="1">
+        <tr>
+            <th>URL Code</th>
+            <th>Original URL</th>
+            <th>Access Count</th>
+        </tr>
+        {% for code, info in urls.items() %}
+        <tr>
+            <td>{{ code }}</td>
+            <td><a href="{{ info['url'] }}">{{ info['url'] }}</a></td>
+            <td>{{ info['clicks'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
