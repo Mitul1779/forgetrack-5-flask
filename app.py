@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify, abort
 import random
 import string
 
@@ -16,7 +16,7 @@ urls = {}
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        url = request.form.get('url').strip()
+        url = request.form.get('url', "").strip()
         if not url:
             return render_template('index.html', error="Please enter a valid URL.")
         print(f"Received URL: {url}")
@@ -40,11 +40,17 @@ def redirect_url(code):
         url_info = urls[code]
         url_info["clicks"] += 1
         return redirect(url_info["url"])
-    return "URL not found", 404
+    abort(404, description="URL code not found.")
 
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html', urls=urls)
+
+@app.route('/api/links')
+def api_links():
+    return jsonify(urls)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

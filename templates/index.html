@@ -1,15 +1,33 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>URL Submission</title>
 </head>
 <body>
     <h1>Submit a URL</h1>
     <form action="/" method="POST">
-        <input type = "url" name = "url" placeholder = "Enter URL"> 
+        <input type = "url" name = "url" placeholder = "Enter URL" required> 
         <input type = "submit" value = "Submit">
     </form>
+
+    <p><a href="/dashboard">Dashboard</a></p>
+
+    <p><a href="/api/links">JSON API</a></p>
+
     {% if url_code %}
-        <p>Your generated URL code is: {{ url_code }}</p>
+        <p>Short URL:</p>
+
+        <a href="{{ url_for('redirect_url', code=url_code) }}">
+            {{ request.host_url }}{{ url_code }}
+        </a>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if message %}
+        <p style="color:green;">{{ message }}</p>
     {% endif %}
 </body>
 </html>

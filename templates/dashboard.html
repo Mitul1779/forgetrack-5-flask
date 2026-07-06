@@ -13,7 +13,11 @@
         {% for code, info in urls.items() %}
         <tr>
             <td>{{ code }}</td>
-            <td><a href="{{ info['url'] }}">{{ info['url'] }}</a></td>
+            <td>
+                <a href="{{ url_for('redirect_url', code=code) }}">
+                    {{ info['url'] }}
+                </a>
+            </td>
             <td>{{ info['clicks'] }}</td>
         </tr>
         {% endfor %}
